@@ -1,0 +1,27 @@
+@startuml arquitectura
+
+node APP_DOCS{
+[DOCUMENTOS]
+[ACEPTA_DOCUMENTOS]
+[RABBIT]
+
+component sendDocs #ccc
+[consulta]  #ccc
+}
+node INPUT{
+[CLIENTE]
+}
+
+CLIENTE -> DOCUMENTOS
+
+
+DOCUMENTOS<-->sendDocs:REST
+
+DOCUMENTOS<-->consulta:REST
+sendDocs<-->RABBIT:AMQP
+consulta<-->RABBIT:AMQP
+
+RABBIT --> ACEPTA_DOCUMENTOS:AMQP
+
+
+@enduml
